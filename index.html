@@ -47,7 +47,7 @@ fbq('init','1879802860116245');fbq('init','621867313789847');fbq('track','PageVi
 <script>
 // ===== TAMBAH LINK DI SINI =====
 // section: nama grup (link dengan section sama dikumpulin jadi satu)
-// content_name: ID unik buat tracking (Pixel KlikLinkBio + GA4 klik_link_bio), huruf kecil_underscore
+// content_name: ID unik buat tracking (Pixel KlikLinkBio {content_name}; GA4 nama event = content_name), huruf kecil_underscore
 const LINKS = [
   {
     section: "Produk Kami",
@@ -92,7 +92,7 @@ for (const [sec, items] of Object.entries(groups)) {
     a.addEventListener("click", () => {
       const p = { content_name: l.content_name, content_category: l.section };
       try { fbq("trackCustom", "KlikLinkBio", p); } catch (e) {}
-      try { gtag("event", "klik_link_bio", { ...p, link_url: l.url, transport_type: "beacon" }); } catch (e) {}
+      try { gtag("event", l.content_name, { ...p, link_url: l.url, transport_type: "beacon" }); } catch (e) {}
     });
     list.appendChild(a);
   });
