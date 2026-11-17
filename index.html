@@ -65,6 +65,15 @@ const LINKS = [
     url: "https://lynk.id/kahaya/w37lwmxoeg41",
     img: "https://cdn.lynkid.my.id/products/09-06-2026/1780982358268_5120930.png"
   },
+  {
+    section: "Rekomendasi",
+    content_name: "buku_kenali_emosi",
+    desc: "Buku cerita & aktivitas buat si Kecil 3+ tahun: kenali 10+ emosi lewat lift-the-flap, sliding, dan roda putar. Dikembangkan bareng dokter & psikolog anak.",
+    cta: "Cek di Shopee",
+    url: "https://s.shopee.co.id/1gKFJqLGBf",
+    img: "img/buku-kenali-emosi.jpg",
+    noUtm: true // link affiliate Shopee, jangan ditambah UTM
+  },
 ];
 // ================================
 
@@ -77,7 +86,7 @@ for (const [sec, items] of Object.entries(groups)) {
   items.forEach(l => {
     const a = document.createElement("a");
     a.className = "card"; a.target = "_blank"; a.rel = "noopener";
-    a.href = l.url + (l.url.includes("?") ? "&" : "?") + UTM;
+    a.href = l.noUtm ? l.url : l.url + (l.url.includes("?") ? "&" : "?") + UTM;
     a.innerHTML = `${l.img ? `<img src="${l.img}" alt="">` : ""}
       <div class="info">${l.desc ? `<div class="d">${l.desc}</div>` : ""}<span class="btn">${l.cta || "Lihat Sekarang"} 👉</span></div>`;
     a.addEventListener("click", () => {
