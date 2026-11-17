@@ -20,8 +20,9 @@
   a.card{display:block;border-radius:16px;overflow:hidden;margin-bottom:14px;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.08);transition:transform .15s}
   a.card:active{transform:scale(.98)}
   a.card img{display:block;width:100%;aspect-ratio:1200/630;object-fit:cover;background:var(--line)}
-  a.card{background:#fff}
-  .btn{display:flex;justify-content:center;align-items:center;gap:8px;margin:12px;padding:13px;border-radius:12px;background:var(--accent);color:#fff;font-weight:800;font-size:16px;animation:pulse 1.8s infinite}
+  .info{background:#1B4332;padding:12px 14px 14px;display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+  .d{color:#d6e2da;font-size:13px;line-height:1.45}
+  .btn{display:inline-block;padding:8px 16px;border-radius:99px;background:var(--accent);color:#fff;font-weight:800;font-size:13px;animation:pulse 1.8s infinite}
   @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(240,138,52,.5)}50%{box-shadow:0 0 0 8px rgba(240,138,52,0)}}
   footer{text-align:center;color:var(--muted);font-size:12px;margin-top:32px}
   footer a{color:var(--accent);text-decoration:none;font-weight:700}
@@ -43,7 +44,8 @@
 const LINKS = [
   {
     section: "Produk Kami",
-    cta: "Pesan Amplopnya Sekarang",
+    desc: "Amplop Lebaran custom bergambar ilustrasi keluargamu sendiri. Lebih unik, spesial, dan beda dari yang lain.",
+    cta: "Pesan Sekarang",
     url: "https://celotehorangtua.myscalev.com/amplop-lebaran-v2",
     img: "https://cdn.jsdelivr.net/gh/Highly-Needed/celoteh-assets@v2/og-amplop.jpg"
   },
@@ -61,7 +63,7 @@ for (const [sec, items] of Object.entries(groups)) {
     a.className = "card"; a.target = "_blank"; a.rel = "noopener";
     a.href = l.url + (l.url.includes("?") ? "&" : "?") + UTM;
     a.innerHTML = `${l.img ? `<img src="${l.img}" alt="">` : ""}
-      <div class="btn">${l.cta || "Lihat Sekarang"} 👉</div>`;
+      <div class="info">${l.desc ? `<div class="d">${l.desc}</div>` : ""}<span class="btn">${l.cta || "Lihat Sekarang"} 👉</span></div>`;
     list.appendChild(a);
   });
 }
