@@ -27,6 +27,12 @@
   footer{text-align:center;color:var(--muted);font-size:12px;margin-top:32px}
   footer a{color:var(--accent);text-decoration:none;font-weight:700}
 </style>
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G8SPNP6G3L"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-G8SPNP6G3L');</script>
+<!-- Meta Pixel: PIKSEL CELOTEH + PIKSEL KAHAYA KREATIV (sama dengan LP amplop) -->
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1879802860116245');fbq('init','621867313789847');fbq('track','PageView');</script>
 </head>
 <body>
 <div class="wrap">
@@ -41,9 +47,11 @@
 <script>
 // ===== TAMBAH LINK DI SINI =====
 // section: nama grup (link dengan section sama dikumpulin jadi satu)
+// content_name: ID unik buat tracking (Pixel KlikLinkBio + GA4 klik_link_bio), huruf kecil_underscore
 const LINKS = [
   {
     section: "Produk Kami",
+    content_name: "amplop_custom",
     desc: "Amplop Lebaran custom bergambar ilustrasi keluargamu sendiri. Lebih unik, spesial, dan beda dari yang lain.",
     cta: "Pesan Sekarang",
     url: "https://celotehorangtua.myscalev.com/amplop-lebaran-v2",
@@ -51,6 +59,7 @@ const LINKS = [
   },
   {
     section: "Rekomendasi",
+    content_name: "kurikulum_internasional",
     desc: "6 kurikulum kelas dunia (Montessori, Cambridge, Finlandia, Reggio Emilia, Waldorf, Singapore Math) dalam 1 paket + toolkit siap pakai. Cukup Rp99.000, sekali bayar selamanya.",
     cta: "Lihat Paketnya",
     url: "https://lynk.id/kahaya/w37lwmxoeg41",
@@ -71,6 +80,11 @@ for (const [sec, items] of Object.entries(groups)) {
     a.href = l.url + (l.url.includes("?") ? "&" : "?") + UTM;
     a.innerHTML = `${l.img ? `<img src="${l.img}" alt="">` : ""}
       <div class="info">${l.desc ? `<div class="d">${l.desc}</div>` : ""}<span class="btn">${l.cta || "Lihat Sekarang"} 👉</span></div>`;
+    a.addEventListener("click", () => {
+      const p = { content_name: l.content_name, content_category: l.section };
+      try { fbq("trackCustom", "KlikLinkBio", p); } catch (e) {}
+      try { gtag("event", "klik_link_bio", { ...p, link_url: l.url, transport_type: "beacon" }); } catch (e) {}
+    });
     list.appendChild(a);
   });
 }
